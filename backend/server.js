@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ['https://mern-stack-app-nine.vercel.app', "http://localhost:5173"],
+    origin: ['https://mern-stack-app-web.vercel.app', "http://localhost:5173"],
     headers: ['Content-Type', 'Authorization'],
     methods: 'GET, POST, PUT, DELETE',
     credentials: true,
