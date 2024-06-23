@@ -8,9 +8,9 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./router/user.routes.js";
 import adminRoutes from "./router/admin.routes.js";
 
-const __dirname = path.resolve();
 dotenv.config();
 const app = express();
+const __dirname = path.resolve();
 
 // middleware
 app.use(express.json());
@@ -21,15 +21,15 @@ app.use(cors({
     methods: 'GET, POST, PUT, DELETE',
     credentials: true,
 }))
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
 
 // routes
 app.use('/api/user/', userRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-});
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/frontend/dist/index.html"));
+})
 
 app.listen(5000, () => {
     console.log("server started");

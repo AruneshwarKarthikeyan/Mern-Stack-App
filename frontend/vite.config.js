@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import dotenv from 'dotenv'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,5 +13,13 @@ export default defineConfig({
       VITE_FIREBASE_MESSAGING_SENDER_ID: JSON.stringify(process.env.VITE_FIREBASE_MESSAGING_SENDER_ID),
       VITE_FIREBASE_APP_ID: JSON.stringify(process.env.VITE_FIREBASE_APP_ID),
     },
+  },
+  proxy: {
+    server: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true
+      }
+    }
   }
 })
