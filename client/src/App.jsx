@@ -18,7 +18,7 @@ import AdminProtectedRoutes from './protectedroutes/AdminProtectedRoutes'
 // css import
 import './App.scss'
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://mern-stack-app-ymxk.onrender.com";
 axios.defaults.withCredentials = true;
 
 function App() {
