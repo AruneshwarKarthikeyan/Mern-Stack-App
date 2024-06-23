@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ['https://lucky-valkyrie-cdcb68.netlify.app', "http://localhost:5173"],
+    origin: ['https://mern-stack-app-web.netlify.app', "http://localhost:5173"],
     headers: ['Content-Type', 'Authorization'],
     methods: 'GET, POST, PUT, DELETE',
     credentials: true,
