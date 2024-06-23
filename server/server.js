@@ -1,16 +1,14 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import path from "path";
-import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import connect_to_mongo_db from "./config/connectDB.js";
 
 import userRoutes from "./router/user.routes.js";
 import adminRoutes from "./router/admin.routes.js";
 
 dotenv.config();
 const app = express();
-const __dirname = path.resolve();
 
 // middleware
 app.use(express.json());
@@ -23,19 +21,13 @@ app.use(cors({
 }))
 
 // routes
+app.get('/', (req, res) => {
+    res.json("server running");
+})
 app.use('/api/user/', userRoutes);
 app.use('/api/admin', adminRoutes);
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-app.use("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/frontend/dist/index.html"));
-})
 
 app.listen(5000, () => {
-    console.log("server started");
+    console.log("server started on port: " + 5000);
+    connect_to_mongo_db();
 })
-
-// database connection
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => { console.log("connected to database") })
-    .catch((error) => { console.log(error) });
