@@ -74,7 +74,7 @@ export const adminLogout = async (req, res) => {
     }
 }
 
-
+//create city endpoint
 export const addCity = async (req, res) => {
     try {
         const { city_name, city_description, custom } = req.body;
@@ -88,10 +88,22 @@ export const addCity = async (req, res) => {
             city_description,
             custom
         })
-        return res.json({ message: "city added", city: city_name });
+        return res.json({ message: "city added" });
 
     } catch (error) {
         console.log("Error in create city Controller : " + error);
+        res.json({ error: "Internal server error!" });
+    }
+}
+
+// get cities endpoint
+
+export const getCity = async (req, res) => {
+    try {
+        const allcities = await cities.find().exec();
+        res.json(allcities);
+    } catch (error) {
+        console.log("Error in get city Controller : " + error);
         res.json({ error: "Internal server error!" });
     }
 }

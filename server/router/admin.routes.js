@@ -7,7 +7,8 @@ import {
     adminAuth,
     getUsers,
     adminLogout,
-    addCity
+    addCity,
+    getCity
 } from '../controller/admin.controller.js';
 
 
@@ -17,5 +18,6 @@ router.post('/admin-auth', adminAuth);
 router.get('/get-users', getUsers);
 router.get('/admin-logout', adminLogout);
 router.post('/create-city', addCity);
+router.get('/get-cities', getCity);
 
 export default router;

@@ -13,6 +13,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 
 // profile icon imports
 import profileicon from '../assets/profile-icon.jpg'
+import { addCity } from "../redux/admin/createCitySlice";
 
 function UserUpdate() {
     const { user } = useSelector((state) => state.admin);
@@ -45,9 +46,20 @@ function UserUpdate() {
             if (image) {
                 handleUpload(image);
             }
+            getCities()
         },
         [image]
     )
+    const getCities = async () => {
+        try {
+            const allCities = await axios.get('/api/admin/get-cities');
+            if (allCities) {
+                dispatch(addCity(allCities.data));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleUpload = useCallback((image) => {
         const storage = getStorage(app);
@@ -186,8 +198,8 @@ function UserUpdate() {
                         <select id="cities" name="town_or_city" value={User.town_or_city} onChange={handleInputChange}>
                             <option value="">Select a city</option>
                             {
-                                cities.map((city, index) => (
-                                    <option key={index} value={city}>{city}</option>
+                                cities && cities.map((city, index) => (
+                                    <option key={index} value={city.city_name}>{city.city_name}</option>
                                 ))
                             }
                         </select>

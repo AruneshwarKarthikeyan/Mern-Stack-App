@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 // redux reducer import
 import { profileUpdated } from '../redux/user/userSlice';
+import { addCity } from "../redux/admin/createCitySlice";
 
 // firebase imports
 import app from '../firebase';
@@ -45,7 +46,20 @@ function Profile() {
         if (image) {
             handleUpload(image);
         }
+        getCities()
+
     }, [image]);
+
+    const getCities = async () => {
+        try {
+            const allCities = await axios.get('/api/admin/get-cities');
+            if (allCities) {
+                dispatch(addCity(allCities.data));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleUpload = useCallback((image) => {
         const storage = getStorage(app);
@@ -184,7 +198,7 @@ function Profile() {
                             <option value="">Select a city</option>
                             {
                                 cities.map((city, index) => (
-                                    <option key={index} value={city}>{city}</option>
+                                    <option key={index} value={city.city_name}>{city.city_name}</option>
                                 ))
                             }
                         </select>

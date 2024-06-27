@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    cities: [],
+    cities: null,
 }
 
 export const createCitySlice = createSlice({
@@ -10,7 +10,7 @@ export const createCitySlice = createSlice({
     initialState,
     reducers: {
         addCity: (state, action) => {
-            state.cities.push(action.payload.city);
+            state.cities = action.payload;
         }
     }
 });

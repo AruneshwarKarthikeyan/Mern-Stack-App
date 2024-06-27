@@ -3,16 +3,12 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { addCity } from "../redux/admin/createCitySlice";
-
 function CreatyCity() {
     const [city, setCity] = useState({
         city_name: "",
         city_description: "",
         custom: ""
     })
-    const dispatch = useDispatch();
 
     const handleInputChange = useCallback(
         (e) => {
@@ -30,8 +26,6 @@ function CreatyCity() {
                 toast.error(data.error);
             }
             else {
-                dispatch(addCity(data));
-                setCity({ city_name: "", city_description: "" })
                 toast.success(data.message);
             }
         } catch (error) {
