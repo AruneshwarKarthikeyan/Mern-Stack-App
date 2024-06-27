@@ -16,6 +16,8 @@ import profileicon from '../assets/profile-icon.jpg';
 
 function Profile() {
     const { currentUser } = useSelector((state) => state.user);
+    const { cities } = useSelector((state) => state.createCity);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const fileRef = useRef(null);
@@ -153,29 +155,90 @@ function Profile() {
                 </div>
 
                 <div id="address-field">
-                    {[
-                        { label: 'Door No', name: 'door_no', type: 'number' },
-                        { label: 'Street', name: 'street', type: 'text' },
-                        { label: 'Town / City', name: 'town_or_city', type: 'text' },
-                        { label: 'District', name: 'district', type: 'text' },
-                        { label: 'State', name: 'state', type: 'text' },
-                        { label: 'Country', name: 'country', type: 'text' },
-                        { label: 'Pincode', name: 'pincode', type: 'number' },
-                    ].map((field) => (
-                        <div key={field.name}>
-                            <input
-                                type={field.type}
-                                id={field.name}
-                                name={field.name}
-                                value={user[field.name]}
-                                onChange={handleInputChange}
-                                required
-                            />
-                            <label htmlFor={field.name}>{field.label}</label>
-                        </div>
-                    ))}
-                </div>
+                    <div>
+                        <input
+                            type="number"
+                            id="door_no"
+                            name="door_no"
+                            value={user.door_no}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <label htmlFor="door_no">Door No</label>
+                    </div>
 
+                    <div>
+                        <input
+                            type="text"
+                            id="street"
+                            name="street"
+                            value={user.street}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <label htmlFor="street">Street</label>
+                    </div>
+
+                    <div>
+                        <select id="cities" name="town_or_city" value={user.town_or_city} onChange={handleInputChange}>
+                            <option value="">Select a city</option>
+                            {
+                                cities.map((city, index) => (
+                                    <option key={index} value={city}>{city}</option>
+                                ))
+                            }
+                        </select>
+                        <label>Town / City</label>
+                    </div>
+
+                    <div>
+                        <input
+                            type="text"
+                            id="district"
+                            name="district"
+                            value={user.district}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <label htmlFor="district">District</label>
+                    </div>
+
+                    <div>
+                        <input
+                            type="text"
+                            id="state"
+                            name="state"
+                            value={user.state}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <label htmlFor="state">State</label>
+                    </div>
+
+                    <div>
+                        <input
+                            type="text"
+                            id="country"
+                            name="country"
+                            value={user.country}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <label htmlFor="country">Country</label>
+                    </div>
+
+                    <div>
+                        <input
+                            type="number"
+                            id="pincode"
+                            name="pincode"
+                            value={user.pincode}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <label htmlFor="pincode">Pincode</label>
+                    </div>
+                </div>
                 <div id="profile-page-btns">
                     <input
                         type="button"

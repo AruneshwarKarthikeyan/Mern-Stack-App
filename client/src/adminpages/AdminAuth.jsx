@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { adminLoginStart, adminLoginSuccess, adminLoginFailed } from '../redux/admin/adminSlice'
 
 // file imports
-import Header from '../components/Header'
+import AdminHeader from '../components/AdminHeader'
 import Themes from '../components/Themes'
 import Footer from '../components/Footer'
 
@@ -51,7 +51,7 @@ function AdminAuth() {
 
     return (
         <>
-            <Header />
+            <AdminHeader />
             <Themes />
             <div id="admin-auth-page">
                 <div id="admin-wrapper">

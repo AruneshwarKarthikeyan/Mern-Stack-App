@@ -2,10 +2,10 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import connect_to_mongo_db from "./config/connectDB.js";
 
 import userRoutes from "./router/user.routes.js";
 import adminRoutes from "./router/admin.routes.js";
+import connect_to_mongo_db from "./config/connectDB.js";
 
 dotenv.config();
 const app = express();

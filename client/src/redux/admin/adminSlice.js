@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     currentAdmin: null,
+    isLoggedIn: false,
     users: null,
     user: null,
 }
@@ -16,6 +17,7 @@ export const adminSlice = createSlice({
         },
         adminLoginSuccess: (state, action) => {
             state.currentAdmin = action.payload;
+            state.isLoggedIn = true;
         },
         adminLoginFailed: (state) => {
             state.currentAdmin = null;

@@ -9,6 +9,7 @@ function Footer() {
     return (
         <div id="footer">
             <NavLink id="navlink" to="/admin-auth">Admin</NavLink>
+            <NavLink id="navlink" to="/login">User</NavLink>
             <input type="checkbox" id="theme-check" onChange={() => dispatch(showThemeWindow())} />
             <label id="navlink" htmlFor="theme-check">Themes</label>
         </div>

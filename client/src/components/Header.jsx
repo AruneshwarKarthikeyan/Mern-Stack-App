@@ -15,8 +15,8 @@ function Header() {
             </label>
             <nav id="navlinks">
                 <NavLink id="navlink" to="/dashboard">Home</NavLink>
-                <NavLink id="navlink" to="/login">Log In</NavLink>
                 <NavLink id="navlink" to="/">Sign Up</NavLink>
+                <NavLink id="navlink" to="/login">Log In</NavLink>
                 <NavLink id="navlink" to="/profile">
                     <img src={profileicon} id="profile-image" alt="P" />
                 </NavLink>

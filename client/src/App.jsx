@@ -14,6 +14,7 @@ import UsersList from './adminpages/UsersList'
 import UserUpdate from './adminpages/UserUpdate'
 import UserProtectedRoutes from './protectedroutes/UserProtectedRoutes'
 import AdminProtectedRoutes from './protectedroutes/AdminProtectedRoutes'
+import CreatyCity from './adminpages/CreatyCity'
 
 // css import
 import './App.scss'
@@ -38,6 +39,7 @@ function App() {
                     <Route path='/admin-create-user' element={<UserCreation />} />
                     <Route path='/admin-get-users' element={<UsersList />} />
                     <Route path='/admin-user-update' element={<UserUpdate />} />
+                    <Route path='/admin-create-city' element={<CreatyCity />} />
                 </Route>
             </Routes>
         </>

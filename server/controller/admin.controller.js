@@ -1,5 +1,7 @@
 import { admins } from "../model/adminmodel/adminSchema.js";
 import { users } from "../model/usermodel/userSchema.js";
+import { cities } from "../model/adminmodel/createCitySchema.js";
+
 import jwt from "jsonwebtoken";
 
 // admin creation endpoint
@@ -33,7 +35,7 @@ export const adminAuth = async (req, res) => {
         if (password !== admin.password) {
             res.json({ error: "Invalid Password!" });
         }
-        const token = jwt.sign({ id: admin.id, name: "admin" }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+        const token = jwt.sign({ id: admin.id, type: "admin" }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
         res.cookie('admin_token', token, {
             httpOnly: true,
             secure: true,
@@ -68,6 +70,28 @@ export const adminLogout = async (req, res) => {
         res.json({ message: "logged out" })
     } catch (error) {
         console.log("Error in Admin Logout Controller : " + error);
+        res.json({ error: "Internal server error!" });
+    }
+}
+
+
+export const addCity = async (req, res) => {
+    try {
+        const { city_name, city_description, custom } = req.body;
+        const cityExisted = await cities.findOne({ city_name }).exec();
+        if (cityExisted) {
+            return res.json({ error: "city already added" });
+        }
+
+        await cities.create({
+            city_name,
+            city_description,
+            custom
+        })
+        return res.json({ message: "city added", city: city_name });
+
+    } catch (error) {
+        console.log("Error in create city Controller : " + error);
         res.json({ error: "Internal server error!" });
     }
 }

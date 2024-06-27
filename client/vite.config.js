@@ -12,6 +12,7 @@ export default defineConfig({
       VITE_FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.VITE_FIREBASE_STORAGE_BUCKET),
       VITE_FIREBASE_MESSAGING_SENDER_ID: JSON.stringify(process.env.VITE_FIREBASE_MESSAGING_SENDER_ID),
       VITE_FIREBASE_APP_ID: JSON.stringify(process.env.VITE_FIREBASE_APP_ID),
+      VITE_BASE_URL: JSON.stringify(process.env.VITE_BASE_URL)
     },
   },
   proxy: {

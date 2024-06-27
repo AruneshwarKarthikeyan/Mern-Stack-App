@@ -8,12 +8,12 @@ import { useEffect } from "react"
 import { adminPanelState, adminLogoutSuccess } from "../redux/admin/adminSlice"
 
 // file imports
-import Header from "../components/Header"
+import AdminHeader from "../components/AdminHeader"
 import Themes from "../components/Themes"
 import Footer from "../components/Footer"
 
 function AdminPanel() {
-    const { currentAdmin, token, users } = useSelector((state) => state.admin);
+    const { currentAdmin, users } = useSelector((state) => state.admin);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -42,10 +42,9 @@ function AdminPanel() {
 
     return (
         <>
-            <Header />
-            <Themes />
             <div id='admin-panel'>
-                <Header />
+                <AdminHeader />
+                <Themes />
                 <div id='admin-panel-wrapper'>
                     <section id='admin-panel-sec1'>
                         <h1 id='admin-panel-title'>Admin Panel</h1>

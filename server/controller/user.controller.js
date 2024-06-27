@@ -1,6 +1,7 @@
-import { users } from "../model/usermodel/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+import { users } from "../model/usermodel/userSchema.js";
 
 // signup endpoint
 export const register = async (req, res) => {
@@ -11,7 +12,7 @@ export const register = async (req, res) => {
             return res.json({ error: "Email ID already exists!" });
         }
         if (password !== confirmpassword) {
-            return res.json({ error: "Password mismatch!" });
+            return res.json({ error: "Password mismatch" });
         }
         const hashedpassword = await bcrypt.hash(password, 10);
         await users.create({
@@ -38,7 +39,7 @@ export const login = async (req, res) => {
         if (!verifyPassword) {
             res.json({ error: "Incorrect password!" });
         }
-        const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+        const token = jwt.sign({ id: user._id, type: "user" }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
         res.cookie('user-token', token, {
             sameSite: "none",
             httpOnly: true,

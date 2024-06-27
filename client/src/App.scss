@@ -77,6 +77,23 @@ body {
     border-radius: 50%;
 }
 
+//admin header component
+#admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 120px;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        color: var(--orange);
+    }
+}
+
 // footer component 
 #footer {
     height: 100px;
@@ -580,16 +597,18 @@ body {
 
     div {
         width: 100%;
-        height: 50px;
+        height: 100px;
         margin-bottom: 40px;
         position: relative;
-        border-bottom: solid 2px var(--black);
+        display: flex;
+        flex-direction: column-reverse;
 
         input {
             width: 100%;
-            height: 100%;
+            height: 50%;
             outline: none;
-            border: none;
+            border: solid 2px var(--black);
+            border-radius: 5px;
             background: transparent;
             padding: 0 5px;
             font-size: 1.1em;
@@ -603,16 +622,20 @@ body {
             font-weight: 500;
             color: var(--black);
             margin-left: 5px;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
             transition: all .2s ease-out;
         }
 
-        input:focus~label,
-        input:valid~label {
-            top: -5px;
+        select {
+            width: 100%;
+            height: 80%;
+            border: solid 2px var(--black);
+            border-radius: 5px;
+            outline: none;
+            background: transparent;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-top: 15px;
+
         }
     }
 }
@@ -978,6 +1001,92 @@ body {
     }
 }
 
+// create city page
+#city-create-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+#city-create-wrapper {
+    height: 550px;
+    width: 480px;
+    border: solid 2px var(--white);
+    background-color: var(--glass);
+    backdrop-filter: blur(14px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    h1 {
+        font-size: 1.5em;
+        font-weight: 500;
+        text-align: center;
+        margin: 18px 0;
+    }
+}
+
+#city-create-form {
+    height: 70%;
+    width: 70%;
+
+    div {
+        width: 100%;
+        height: 80px;
+        margin: 10px 0;
+
+        input {
+            width: 100%;
+            height: 50%;
+            margin-top: 5px;
+            border: solid 2px var(--black);
+            border-radius: 4px;
+            padding: 0 5px;
+            font-size: 1em;
+            font-weight: 500;
+            outline: none;
+            background: transparent;
+        }
+
+        label {
+            font-size: 1em;
+            font-weight: 500;
+        }
+    }
+}
+
+#city-create-form div:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input:not(input:first-child),
+    #cancel {
+        width: 40%;
+        outline: none;
+        border: none;
+        font-size: 1.1em;
+        font-weight: 500;
+    }
+
+    input[type="submit"] {
+        background-color: var(--orange);
+    }
+
+    input[type="button"] {
+        background-color: var(--red);
+        color: var(--white);
+        outline: none;
+        border: none;
+        font-size: 1.1em;
+        font-weight: 500;
+    }
+}
+
 // **************************
 
 
@@ -1033,6 +1142,51 @@ body {
     }
 
     #check:checked~#navlinks {
+        top: 60px;
+    }
+
+    // admin header component
+    #admin-header {
+        width: 100vw;
+        height: 60px;
+        padding: 0 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: var(--glass);
+        backdrop-filter: blur(20px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 9;
+
+        h1 {
+            font-size: 1.2em;
+        }
+    }
+
+    #bars {
+        display: block;
+        font-size: 1.2em;
+        color: white;
+    }
+
+    #admin-navlinks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        top: -55vh;
+        width: 100vw;
+        height: 50vh;
+        background-color: rgb(48, 48, 48);
+        z-index: 8;
+        transition: top .3s ease;
+        border: inherit;
+    }
+
+    #check:checked~#admin-navlinks {
         top: 60px;
     }
 
@@ -1656,5 +1810,16 @@ body {
     #admin-user-creation-submit {
         width: 100%;
         height: 50px;
+    }
+
+    // admin create city page
+    #city-create-page {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    #city-create-wrapper {
+        width: 80%;
+        height: 80%;
     }
 }
