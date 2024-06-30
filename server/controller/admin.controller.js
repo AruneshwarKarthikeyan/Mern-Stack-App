@@ -107,3 +107,49 @@ export const getCity = async (req, res) => {
         res.json({ error: "Internal server error!" });
     }
 }
+
+// delete city endpoint
+
+export const deleteCity = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const city = await cities.findByIdAndDelete({ _id: id }).exec();
+        if (city) {
+            res.json({ message: "city deleted" });
+        } else {
+            res.json({ error: "city doesn't exists" });
+        }
+    } catch (error) {
+        console.log("Error in delete city Controller : " + error);
+        res.json({ error: "Internal server error!" });
+    }
+}
+
+// update city endpoint 
+export const updateCity = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { city_name, city_description } = req.body;
+        const updatedCity = await cities.findByIdAndUpdate(
+            { _id: id },
+            {
+                $set: {
+                    city_name,
+                    city_description
+                }
+            },
+            { new: true, runValidators: true }
+        ).exec();
+
+        if (updatedCity) {
+            res.json({ message: "updated city" });
+        }
+        else {
+            res.json({ error: "city not updated" });
+        }
+    } catch (error) {
+        console.log("Error in update city Controller : " + error);
+        res.json({ error: "Internal server error!" });
+    }
+}

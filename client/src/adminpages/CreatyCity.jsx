@@ -26,6 +26,7 @@ function CreatyCity() {
                 toast.error(data.error);
             }
             else {
+                setCity({ city_name: "", city_description: "" });
                 toast.success(data.message);
             }
         } catch (error) {
@@ -44,6 +45,7 @@ function CreatyCity() {
                             type="text"
                             id="city-name"
                             name="city_name"
+                            value={city.city_name}
                             onChange={handleInputChange}
                             required
                         />
@@ -55,6 +57,7 @@ function CreatyCity() {
                             type="text"
                             id="city-description"
                             name="city_description"
+                            value={city.city_description}
                             onChange={handleInputChange}
                             required
                         />
@@ -66,9 +69,15 @@ function CreatyCity() {
                     </div>
 
                     <div>
-                        <Link id="cancel" to="/admin-panel"><input type="button" value="cancel" /></Link>
                         <input type="submit" value="create" />
+                        <Link to="/admin-get-city">
+                            <input type="button" value="Get Cities" />
+                        </Link>
+                        <Link id="cancel" to="/admin-panel">
+                            <input id="cancel" type="button" value="cancel" />
+                        </Link>
                     </div>
+
                 </form>
             </div>
         </div>
