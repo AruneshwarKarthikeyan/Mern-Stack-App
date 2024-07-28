@@ -14,8 +14,10 @@ import UsersList from './adminpages/UsersList'
 import UserUpdate from './adminpages/UserUpdate'
 import UserProtectedRoutes from './protectedroutes/UserProtectedRoutes'
 import AdminProtectedRoutes from './protectedroutes/AdminProtectedRoutes'
-import CreatyCity from './adminpages/CreatyCity'
-import CityLists from "./adminpages/CityLists"
+import ServiceLocations from './adminpages/ServiceLocations'
+import States from './adminpages/States'
+import Countries from './adminpages/Countries'
+import Cities from './adminpages/Cities'
 
 // css import
 import './App.scss'
@@ -40,8 +42,10 @@ function App() {
                     <Route path='/admin-create-user' element={<UserCreation />} />
                     <Route path='/admin-get-users' element={<UsersList />} />
                     <Route path='/admin-user-update' element={<UserUpdate />} />
-                    <Route path='/admin-get-city' element={<CityLists />} />
-                    <Route path='/admin-create-city' element={<CreatyCity />} />
+                    <Route path='/admin-locations' element={<ServiceLocations />} />
+                    <Route path='/country' element={<Countries />} />
+                    <Route path='/city' element={<Cities />} />
+                    <Route path='/state' element={<States />} />
                 </Route>
             </Routes>
         </>

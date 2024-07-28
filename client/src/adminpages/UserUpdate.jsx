@@ -13,7 +13,6 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 
 // profile icon imports
 import profileicon from '../assets/profile-icon.jpg'
-import { addCity } from "../redux/admin/createCitySlice";
 
 function UserUpdate() {
     const { user } = useSelector((state) => state.admin);

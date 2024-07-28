@@ -15,7 +15,7 @@ function AdminHeader() {
                 <FontAwesomeIcon id="bars" icon={faBars} />
             </label>
             <nav id="admin-navlinks">
-                <NavLink id="navlink" to="/admin-create-city" style={{ display: isLoggedIn ? 'block' : 'none' }}>Create City</NavLink>
+                <NavLink id="navlink" to="/admin-locations" style={{ display: isLoggedIn ? 'block' : 'none' }}>Service Enabled Locations</NavLink>
             </nav>
         </div>
     )

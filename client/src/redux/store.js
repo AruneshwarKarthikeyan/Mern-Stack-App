@@ -6,9 +6,9 @@ import persistStore from 'redux-persist/es/persistStore';
 import adminReducer from './admin/adminSlice'
 import userReducer from './user/userSlice'
 import themeReducer from './theme/themeSlice'
-import createCityReducer from './admin/createCitySlice'
+import locationReducer from './admin/locationSlice'
 
-const rootReducer = combineReducers({ user: userReducer, admin: adminReducer, theme: themeReducer, createCity: createCityReducer });
+const rootReducer = combineReducers({ user: userReducer, admin: adminReducer, theme: themeReducer, location: locationReducer });
 
 const persistConfig = {
     key: 'root',

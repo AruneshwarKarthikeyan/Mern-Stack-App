@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 
 // redux reducer import
 import { profileUpdated } from '../redux/user/userSlice';
-import { addCity } from "../redux/admin/createCitySlice";
 
 // firebase imports
 import app from '../firebase';
