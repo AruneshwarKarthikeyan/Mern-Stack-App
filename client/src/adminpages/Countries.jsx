@@ -120,57 +120,102 @@ function Countries() {
     );
 
     return (
-        <div id="locations">
-            <h1 >countries</h1>
-            <div id="addLocation" style={{ display: isLocationPopupVisible ? "block" : "none" }}>
-                <h2>Add Country</h2>
-                <form onSubmit={handleSubmit}>
-                    <FontAwesomeIcon icon={faXmark} id="close-btn" onClick={() => { dispatch(hideLocationWindow()) }} />
-                    <div>
-                        <label>country name</label>
-                        <input type="text" name="country_name" value={newCountry.country_name} onChange={handlePopupInputChange} />
-                    </div>
-                    <div>
-                        <label>country description</label>
-                        <input type="text" name="country_description" value={newCountry.country_description} onChange={handlePopupInputChange} />
-                    </div>
-                    <div>
-                        <label>optional</label>
-                        <input type="text" />
-                    </div>
-                    <div>
-                        <input type="submit" value="Add Country" />
-                    </div>
-                </form>
+        <>
+            <div id="locations">
+                <h1 >countries</h1>
+                <div id="addLocation" style={{ display: isLocationPopupVisible ? "block" : "none" }}>
+                    <h2>Add Country</h2>
+                    <form onSubmit={handleSubmit}>
+                        <FontAwesomeIcon icon={faXmark} id="close-btn" onClick={() => { dispatch(hideLocationWindow()) }} />
+                        <div>
+                            <label>country name</label>
+                            <input type="text" name="country_name" value={newCountry.country_name} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>country description</label>
+                            <input type="text" name="country_description" value={newCountry.country_description} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>optional</label>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Add Country" />
+                        </div>
+                    </form>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>country-name</th>
+                            <th>country-description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            countries.map(
+                                (country, index) => (
+                                    <tr key={index}>
+                                        <td contentEditable={true} onBlur={(e) => handleInputChange(e, "country_name")} suppressContentEditableWarning={true}>{country.country_name}</td>
+                                        <td contentEditable={true} onBlur={(e) => handleInputChange(e, "country_description")} suppressContentEditableWarning={true}>{country.country_description}</td>
+                                        <td><button id='update' onClick={() => { handleUpdate(country._id) }}>update</button></td>
+                                        <td><button id="delete" onClick={() => { handleDelete(country._id) }}>delete</button></td>
+                                    </tr>
+                                )
+                            )
+                        }
+                    </tbody>
+                </table>
+                <div id="btns">
+                    <button onClick={() => { dispatch(showLocationWindow()) }}>Add country</button>
+                </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>country-name</th>
-                        <th>country-description</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
+
+            {/* mobile screen */}
+
+            <div id="mobile-screen-locations">
+                <div id="addLocation" style={{ display: isLocationPopupVisible ? "block" : "none" }}>
+                    <h2>Add Country</h2>
+                    <form onSubmit={handleSubmit}>
+                        <FontAwesomeIcon icon={faXmark} id="close-btn" onClick={() => { dispatch(hideLocationWindow()) }} />
+                        <div>
+                            <label>country name</label>
+                            <input type="text" name="country_name" value={newCountry.country_name} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>country description</label>
+                            <input type="text" name="country_description" value={newCountry.country_description} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>optional</label>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Add Country" />
+                        </div>
+                    </form>
+                </div>
+                <div id="grid">
                     {
                         countries.map(
                             (country, index) => (
-                                <tr key={index}>
-                                    <td contentEditable={true} onBlur={(e) => handleInputChange(e, "country_name")} suppressContentEditableWarning={true}>{country.country_name}</td>
-                                    <td contentEditable={true} onBlur={(e) => handleInputChange(e, "country_description")} suppressContentEditableWarning={true}>{country.country_description}</td>
-                                    <td><button id='update' onClick={() => { handleUpdate(country._id) }}>update</button></td>
-                                    <td><button id="delete" onClick={() => { handleDelete(country._id) }}>delete</button></td>
-                                </tr>
+                                <div key={index} id="location-card">
+                                    <p onBlur={(e) => handleInputChange(e, "country_name")} contentEditable={true} suppressContentEditableWarning={true}>{country.country_name}</p>
+                                    <p onBlur={(e) => handleInputChange(e, "country_description")} contentEditable={true} suppressContentEditableWarning={true}>{country.country_description}</p>
+                                    <button id='update' onClick={() => { handleUpdate(country._id) }}>update</button>
+                                    <button id="delete" onClick={() => { handleDelete(country._id) }}>delete</button>
+                                </div>
                             )
                         )
                     }
-                </tbody>
-            </table>
-            <div id="btns">
-                <button onClick={() => { dispatch(showLocationWindow()) }}>Add country</button>
+                </div>
+                <div id="btns">
+                    <button onClick={() => { dispatch(showLocationWindow()) }}>Add country</button>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

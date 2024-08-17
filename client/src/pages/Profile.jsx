@@ -16,8 +16,9 @@ import profileicon from '../assets/profile-icon.jpg';
 
 function Profile() {
     const { currentUser } = useSelector((state) => state.user);
-    const { cities } = useSelector((state) => state.createCity);
-
+    const [cities, setCities] = useState([]);
+    const [states, setStates] = useState([]);
+    const [countries, setCountries] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const fileRef = useRef(null);
@@ -45,7 +46,9 @@ function Profile() {
         if (image) {
             handleUpload(image);
         }
-        getCities()
+        getCities();
+        getStates();
+        getCountries();
 
     }, [image]);
 
@@ -53,7 +56,29 @@ function Profile() {
         try {
             const allCities = await axios.get('/api/admin/get-cities');
             if (allCities) {
-                dispatch(addCity(allCities.data));
+                setCities(allCities.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getStates = async () => {
+        try {
+            const allStates = await axios.get('/api/admin/get-states');
+            if (allStates) {
+                setStates(allStates.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getCountries = async () => {
+        try {
+            const allCountries = await axios.get('/api/admin/get-countries');
+            if (allCountries) {
+                setCountries(allCountries.data);
             }
         } catch (error) {
             console.log(error);
@@ -201,43 +226,42 @@ function Profile() {
                                 ))
                             }
                         </select>
-                        <label>Town / City</label>
+                        <label>City</label>
                     </div>
 
-                    <div>
+                    {/* <div>
                         <input
                             type="text"
                             id="district"
                             name="district"
                             value={user.district}
                             onChange={handleInputChange}
-                            required
                         />
                         <label htmlFor="district">District</label>
+                    </div> */}
+
+                    <div>
+                        <select id="states" name="state" value={user.state} onChange={handleInputChange}>
+                            <option value="">Select a state</option>
+                            {
+                                states.map((state, index) => (
+                                    <option key={index} value={state.state_name}>{state.state_name}</option>
+                                ))
+                            }
+                        </select>
+                        <label>State</label>
                     </div>
 
                     <div>
-                        <input
-                            type="text"
-                            id="state"
-                            name="state"
-                            value={user.state}
-                            onChange={handleInputChange}
-                            required
-                        />
-                        <label htmlFor="state">State</label>
-                    </div>
-
-                    <div>
-                        <input
-                            type="text"
-                            id="country"
-                            name="country"
-                            value={user.country}
-                            onChange={handleInputChange}
-                            required
-                        />
-                        <label htmlFor="country">Country</label>
+                        <select id="countries" name="country" value={user.country} onChange={handleInputChange}>
+                            <option value="">Select a country</option>
+                            {
+                                countries.map((country, index) => (
+                                    <option key={index} value={country.country_name}>{country.country_name}</option>
+                                ))
+                            }
+                        </select>
+                        <label>Country</label>
                     </div>
 
                     <div>

@@ -120,57 +120,102 @@ function States() {
     );
 
     return (
-        <div id="locations">
-            <h1 >States</h1>
-            <div id="addLocation" style={{ display: isLocationPopupVisible ? "block" : "none" }}>
-                <h2>Add State</h2>
-                <form onSubmit={handleSubmit}>
-                    <FontAwesomeIcon icon={faXmark} id="close-btn" onClick={() => { dispatch(hideLocationWindow()) }} />
-                    <div>
-                        <label>state name</label>
-                        <input type="text" name="state_name" value={newState.state_name} onChange={handlePopupInputChange} />
-                    </div>
-                    <div>
-                        <label>state description</label>
-                        <input type="text" name="state_description" value={newState.state_description} onChange={handlePopupInputChange} />
-                    </div>
-                    <div>
-                        <label>optional</label>
-                        <input type="text" />
-                    </div>
-                    <div>
-                        <input type="submit" value="Add State" />
-                    </div>
-                </form>
+        <>
+            <div id="locations">
+                <h1 >States</h1>
+                <div id="addLocation" style={{ display: isLocationPopupVisible ? "block" : "none" }}>
+                    <h2>Add State</h2>
+                    <form onSubmit={handleSubmit}>
+                        <FontAwesomeIcon icon={faXmark} id="close-btn" onClick={() => { dispatch(hideLocationWindow()) }} />
+                        <div>
+                            <label>state name</label>
+                            <input type="text" name="state_name" value={newState.state_name} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>state description</label>
+                            <input type="text" name="state_description" value={newState.state_description} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>optional</label>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Add State" />
+                        </div>
+                    </form>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>state-name</th>
+                            <th>state-description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            states.map(
+                                (state, index) => (
+                                    <tr key={index}>
+                                        <td contentEditable={true} onBlur={(e) => handleInputChange(e, "state_name")} suppressContentEditableWarning={true}>{state.state_name}</td>
+                                        <td contentEditable={true} onBlur={(e) => handleInputChange(e, "state_description")} suppressContentEditableWarning={true}>{state.state_description}</td>
+                                        <td><button id='update' onClick={() => { handleUpdate(state._id) }}>update</button></td>
+                                        <td><button id="delete" onClick={() => { handleDelete(state._id) }}>delete</button></td>
+                                    </tr>
+                                )
+                            )
+                        }
+                    </tbody>
+                </table>
+                <div id="btns">
+                    <button onClick={() => { dispatch(showLocationWindow()) }}>Add state</button>
+                </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>state-name</th>
-                        <th>state-description</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
+
+            {/* mobile screen */}
+
+            <div id="mobile-screen-locations">
+                <div id="addLocation" style={{ display: isLocationPopupVisible ? "block" : "none" }}>
+                    <h2>Add State</h2>
+                    <form onSubmit={handleSubmit}>
+                        <FontAwesomeIcon icon={faXmark} id="close-btn" onClick={() => { dispatch(hideLocationWindow()) }} />
+                        <div>
+                            <label>state name</label>
+                            <input type="text" name="state_name" value={newState.state_name} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>state description</label>
+                            <input type="text" name="state_description" value={newState.state_description} onChange={handlePopupInputChange} />
+                        </div>
+                        <div>
+                            <label>optional</label>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Add State" />
+                        </div>
+                    </form>
+                </div>
+                <div id="grid">
                     {
                         states.map(
                             (state, index) => (
-                                <tr key={index}>
-                                    <td contentEditable={true} onBlur={(e) => handleInputChange(e, "state_name")} suppressContentEditableWarning={true}>{state.state_name}</td>
-                                    <td contentEditable={true} onBlur={(e) => handleInputChange(e, "state_description")} suppressContentEditableWarning={true}>{state.state_description}</td>
-                                    <td><button id='update' onClick={() => { handleUpdate(state._id) }}>update</button></td>
-                                    <td><button id="delete" onClick={() => { handleDelete(state._id) }}>delete</button></td>
-                                </tr>
+                                <div key={index} id="location-card">
+                                    <p onBlur={(e) => handleInputChange(e, "state_name")} contentEditable={true} suppressContentEditableWarning={true}>{state.state_name}</p>
+                                    <p onBlur={(e) => handleInputChange(e, "state_description")} contentEditable={true} suppressContentEditableWarning={true}>{state.state_description}</p>
+                                    <button id='update' onClick={() => { handleUpdate(state._id) }}>update</button>
+                                    <button id="delete" onClick={() => { handleDelete(state._id) }}>delete</button>
+                                </div>
                             )
                         )
                     }
-                </tbody>
-            </table>
-            <div id="btns">
-                <button onClick={() => { dispatch(showLocationWindow()) }}>Add state</button>
+                </div>
+                <div id="btns">
+                    <button onClick={() => { dispatch(showLocationWindow()) }}>Add state</button>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
